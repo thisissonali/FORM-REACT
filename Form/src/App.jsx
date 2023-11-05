@@ -6,14 +6,20 @@ function App() {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [iseRegistered, setRegistered] = useState(false);
+  const [isError, setIsError] = useState(false);
+
   const submitHandler = (event) => {
-    setRegistered(true);
+    if(firstName && lastName && email){
+      setRegistered(true);
+    } else {
+      setIsError(true);
+    }
     event.preventDefault();
   }
   return (
     <div className="container">
-      <form className="form-container">
-        {iseRegistered && firstName && lastName && email ? (
+      <form className="form-container" onSubmit={submitHandler}>
+        {iseRegistered ? (
           <div className="success-container">
             Success! Thank you for registering
           </div>
@@ -23,7 +29,7 @@ function App() {
           placeholder="First Name"
           onChange={(event) => setFirstName(event.target.value)}
         />
-        {iseRegistered && !firstName ? (
+        {isError && !firstName ? (
           <div className="warning">*Please Enter First Name</div>
         ) : null}
         <input
@@ -31,7 +37,7 @@ function App() {
           placeholder="Last Name"
           onChange={(event) => setLastName(event.target.value)}
         />
-        {iseRegistered && !lastName ? (
+        {isError && !lastName ? (
           <div className="warning">*Please Enter Last Name</div>
         ) : null}
         <input
@@ -39,10 +45,10 @@ function App() {
           placeholder="Email"
           onChange={(event) => setEmail(event.target.value)}
         />
-        {iseRegistered && !email ? (
+        {isError && !email ? (
           <div className="warning">*Please Enter Email</div>
         ) : null}
-        <button type="submit" className="submit-button" onClick={submitHandler}>
+        <button type="submit" className="submit-button">
           Register
         </button>
       </form>
