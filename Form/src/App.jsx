@@ -13,7 +13,7 @@ function App() {
   return (
     <div className="container">
       <form className="form-container">
-        {iseRegistered ? (
+        {iseRegistered && firstName && lastName && email ? (
           <div className="success-container">
             Success! Thank you for registering
           </div>
@@ -23,16 +23,25 @@ function App() {
           placeholder="First Name"
           onChange={(event) => setFirstName(event.target.value)}
         />
+        {iseRegistered && !firstName ? (
+          <div className="warning">*Please Enter First Name</div>
+        ) : null}
         <input
           value={lastName}
           placeholder="Last Name"
           onChange={(event) => setLastName(event.target.value)}
         />
+        {iseRegistered && !lastName ? (
+          <div className="warning">*Please Enter Last Name</div>
+        ) : null}
         <input
           value={email}
           placeholder="Email"
           onChange={(event) => setEmail(event.target.value)}
         />
+        {iseRegistered && !email ? (
+          <div className="warning">*Please Enter Email</div>
+        ) : null}
         <button type="submit" className="submit-button" onClick={submitHandler}>
           Register
         </button>

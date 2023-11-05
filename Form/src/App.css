@@ -50,3 +50,10 @@ input{
   background-color: #068FFF;
   color: white;
 }
+.warning{
+    font-size: 10px;
+    width: 75%;
+    border: none;
+    color: red;
+    margin-bottom: -35px;
+}
